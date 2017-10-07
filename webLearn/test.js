@@ -1,11 +1,19 @@
 
 var fs = require ("fs");
+//此为一种阻塞的方式
+//var data = fs.readFileSync("in.txt","UTF-8");
 
-var data = fs.readFileSync("in.txt","UTF-8");
-function test() {
-  return data.toString();
-}
-console.log(data.toString());
+//这是一个非阻塞操作
+var data ="string";
+fs.readFile('in.txt', function (err,data) {
+    if (err)
+    {
+       console.log(err.stack);
+        return;
+    };
+  console.log(data.toString());
+
+});
+
 console.log("程序运行完毕");
-
-exports.test = test;
+//运行的顺序发生 一些变化  先不管那些操作，最后自己会输出
